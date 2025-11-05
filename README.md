@@ -10,8 +10,8 @@ La app cumple con los requisitos del trabajo final (home, about, pages, auth, pe
 
 ## Tecnologías principales
 
-- **Python 3.12**
-- **Django 5.x**
+- **Python 3.12.4**
+- **Django 5.2.7**
 - **SQLite** (desarrollo)
 - **Tailwind CSS v4 (CLI)** para la UI
 - **CKEditor** para texto enriquecido en los briefs
@@ -49,7 +49,8 @@ La app cumple con los requisitos del trabajo final (home, about, pages, auth, pe
 
 ## Requisitos previos
 
-- Python 3.12 instalado.
+- Python 3.12.X instalado.
+- Django 5.2.X
 - Node.js (para compilar Tailwind).
 - Git.
 
@@ -73,7 +74,7 @@ La app cumple con los requisitos del trabajo final (home, about, pages, auth, pe
    ```bash
         pip install --upgrade pip
         pip install -r requirements.txt
-```
+   ```
 4.  **Instalar dependencias de Node (Tailwind)**
    ```bash
         npm install
