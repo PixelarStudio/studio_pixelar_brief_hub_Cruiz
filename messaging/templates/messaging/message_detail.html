@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block title %}Detalle mensaje | Pixelar Brief Hub{% endblock %}
+{% block content %}
+  <section class="max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-3">
+    <h1 class="text-xl font-semibold">{{ message_obj.subject }}</h1>
+    <p class="text-xs text-slate-500">
+      De {{ message_obj.sender.username }} para {{ message_obj.recipient.username }} · {{ message_obj.created_at }}
+    </p>
+    <hr class="border-slate-200">
+    <p class="text-sm text-slate-800 whitespace-pre-line">{{ message_obj.body }}</p>
+    <p class="text-sm">
+      <a href="{% url 'inbox' %}" class="text-blue-600 hover:underline">Volver</a>
+    </p>
+  </section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% block title %}Eliminar página | Pixelar Brief Hub{% endblock %}
+{% block content %}
+  <section class="max-w-md mx-auto bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+    <h1 class="text-xl font-semibold">Eliminar página</h1>
+    <p class="text-sm text-slate-700">
+      ¿Seguro que querés borrar <strong>{{ object.title }}</strong>?
+    </p>
+    <form method="post" class="flex items-center gap-3">
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="px-4 py-2 rounded-md bg-red-600 text-white text-sm hover:bg-red-700"
+      >
+        Sí, borrar
+      </button>
+      <a
+        href="{% url 'brief_detail' object.pk %}"
+        class="px-4 py-2 rounded-md border border-slate-300 text-sm text-slate-800 hover:bg-slate-100"
+      >
+        Cancelar
+      </a>
+    </form>
+  </section>
+{% endblock %}

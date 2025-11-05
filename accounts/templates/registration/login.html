@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+{% block title %}Login | Pixelar Brief Hub{% endblock %}
+{% block content %}
+  <section class="flex justify-center">
+    <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg shadow-slate-200 border border-slate-100">
+      <div class="mb-4">
+        <h1 class="text-xl font-semibold text-slate-900">Ingresar</h1>
+        <p class="mt-1 text-sm text-slate-500">
+          Accedé a tus briefs y mensajes de Studio Pixelar.
+        </p>
+      </div>
+
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+          <div class="space-y-1">
+            <label
+              for="{{ field.id_for_label }}"
+              class="block text-sm font-medium text-slate-700"
+            >
+              {{ field.label }}
+            </label>
+            {{ field }}
+            {% for error in field.errors %}
+              <p class="text-xs text-red-600">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <button
+          type="submit"
+          class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white"
+        >
+          Entrar
+        </button>
+      </form>
+
+      <p class="mt-4 text-xs text-slate-500">
+        ¿No tenés cuenta?
+        <a href="{% url 'signup' %}" class="font-medium text-emerald-600 hover:text-emerald-700">
+          Registrate
+        </a>
+      </p>
+    </div>
+  </section>
+{% endblock %}

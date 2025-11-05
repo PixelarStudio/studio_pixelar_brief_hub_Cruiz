@@ -1,0 +1,68 @@
+{% extends "core/base.html" %}
+{% block title %}About | Pixelar Brief Hub{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+  <header class="space-y-2">
+    <p class="text-xs font-semibold uppercase tracking-[0.15em] text-emerald-600">
+      Sobre el proyecto
+    </p>
+    <h1 class="text-2xl font-semibold tracking-tight text-slate-900">
+      Acerca de Pixelar Brief Hub
+    </h1>
+    <p class="text-sm text-slate-600 max-w-2xl">
+      Pixelar Brief Hub es mi trabajo final de Python/Django y, al mismo tiempo,
+      un panel interno para organizar los briefs de proyectos reales de
+      <span class="font-medium">Studio Pixelar</span>.
+    </p>
+  </header>
+
+  <div class="grid gap-4 md:grid-cols-3 text-sm">
+    <article class="md:col-span-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-2">
+      <h2 class="text-sm font-semibold text-slate-800">
+        Objetivo del proyecto
+      </h2>
+      <p class="text-slate-700">
+        La idea es tener un lugar simple donde documentar cada propuesta de diseño
+        y desarrollo web: contexto del cliente, tipo de servicio, alcances y
+        material de referencia. Además, incluye mensajería interna y perfiles
+        de usuario para simular un entorno de trabajo real.
+      </p>
+      <p class="text-slate-700">
+        El sistema cumple con los requisitos del trabajo final (home, about,
+        pages, CRUD completo, autenticación, perfil, mensajería, imágenes, etc.)
+        sin dejar de ser una herramienta útil que puedo seguir usando en
+        Studio Pixelar.
+      </p>
+    </article>
+
+    <aside class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-2">
+      <h2 class="text-sm font-semibold text-slate-800">
+        Sobre mí
+      </h2>
+      <p class="text-slate-700">
+        Soy <span class="font-medium">Cristian Javier Ruiz</span>, desarrollador
+        frontend y fundador de Studio Pixelar. Trabajo principalmente con
+        React, Astro y Tailwind para crear sitios rápidos, accesibles y
+        pensados para producción.
+      </p>
+      <p class="text-slate-700">
+        Este proyecto en Django es un complemento al stack habitual, enfocado en
+        tener un backend simple para organizar briefs y comunicación interna.
+      </p>
+    </aside>
+  </div>
+
+  <section class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-sm space-y-2">
+    <h2 class="text-sm font-semibold text-slate-800">
+      Cómo se integra en el día a día
+    </h2>
+    <p class="text-slate-700">
+      Puedo usar Pixelar Brief Hub para registrar nuevos proyectos, seguir el
+      estado de cada brief y dejar comentarios internos. La misma estructura se
+      puede extender a futuros proyectos o adaptarse a otros flujos de trabajo
+      de Studio Pixelar.
+    </p>
+  </section>
+</section>
+{% endblock %}

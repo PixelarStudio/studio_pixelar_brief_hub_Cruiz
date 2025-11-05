@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% block title %}{{ brief.title }} | Pixelar Brief Hub{% endblock %}
+{% block content %}
+  <article class="space-y-4">
+    <header class="space-y-2">
+      <h1 class="text-2xl font-semibold">{{ brief.title }}</h1>
+      <p class="text-xs text-slate-500">
+        Cliente: {{ brief.client_name }} ·
+        Tipo de servicio: {{ brief.service_type }} ·
+        Fecha: {{ brief.created_at }}
+        {% if brief.owner %} · Responsable: {{ brief.owner.username }}{% endif %}
+      </p>
+    </header>
+
+    {% if brief.reference_image %}
+      <img
+        src="{{ brief.reference_image.url }}"
+        alt="Imagen de referencia de {{ brief.title }}"
+        class="w-full max-h-80 object-cover rounded-xl border border-slate-200"
+      >
+    {% endif %}
+
+    <div class="prose prose-sm max-w-none">
+      {{ brief.body|safe }}
+    </div>
+
+    {% if user.is_authenticated %}
+      <div class="flex gap-3 text-sm">
+        <a href="{% url 'brief_update' brief.pk %}" class="text-blue-600 hover:underline">
+          Editar
+        </a>
+        <a href="{% url 'brief_delete' brief.pk %}" class="text-red-600 hover:underline">
+          Borrar
+        </a>
+      </div>
+    {% endif %}
+  </article>
+{% endblock %}

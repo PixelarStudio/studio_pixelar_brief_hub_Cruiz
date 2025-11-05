@@ -1,0 +1,115 @@
+{% extends "core/base.html" %}
+{% block title %}Pages (Briefs) | Pixelar Brief Hub{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+  <header class="flex flex-wrap items-center justify-between gap-3">
+    <div class="space-y-1">
+      <h1 class="text-2xl font-semibold tracking-tight text-slate-900">
+        Páginas (Briefs)
+      </h1>
+      <p class="text-sm text-slate-600 max-w-xl">
+        Listado de briefs de proyectos de Studio Pixelar. Podés filtrar por
+        título o cliente y entrar al detalle de cada uno.
+      </p>
+    </div>
+
+    {% if user.is_authenticated %}
+      <a
+        href="{% url 'brief_create' %}"
+        class="inline-flex items-center rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-100"
+      >
+        Nueva página
+      </a>
+    {% endif %}
+  </header>
+
+  <section class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <form method="get" class="flex flex-wrap items-center gap-3">
+      <div class="flex-1 min-w-[200px] space-y-1">
+        <label for="q" class="block text-xs font-medium text-slate-600">
+          Buscar por título o cliente
+        </label>
+        <input
+          id="q"
+          type="search"
+          name="q"
+          class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 placeholder:text-slate-400"
+          placeholder="Ej: San Isidro, Ruba Tecno..."
+          value="{{ request.GET.q }}"
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white"
+      >
+        Buscar
+      </button>
+    </form>
+  </section>
+
+  {% if briefs %}
+    <ul class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {% for brief in briefs %}
+        <li class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col">
+          {% if brief.reference_image %}
+            <img
+              src="{{ brief.reference_image.url }}"
+              alt="Imagen de referencia de {{ brief.title }}"
+              class="h-40 w-full object-cover"
+            >
+          {% endif %}
+
+          <article class="flex flex-1 flex-col p-4 space-y-3">
+            <header class="space-y-1">
+              <h2 class="text-lg font-semibold text-slate-900">
+                {{ brief.title }}
+              </h2>
+              <p class="text-xs text-slate-500">
+                Cliente: <span class="font-medium text-slate-700">{{ brief.client_name }}</span>
+                · Tipo: {{ brief.service_type }}
+                · {{ brief.created_at|date:"d/m/Y" }}
+              </p>
+            </header>
+
+            <p class="text-sm text-slate-700 line-clamp-3">
+              {{ brief.body|striptags|truncatechars:140 }}
+            </p>
+
+            <div class="mt-auto flex items-center justify-between pt-2">
+              <a
+                href="{% url 'brief_detail' brief.pk %}"
+                class="inline-flex items-center text-sm font-medium text-emerald-600 hover:text-emerald-700"
+              >
+                Leer más
+              </a>
+
+              {% if user.is_authenticated %}
+                <div class="flex gap-3 text-xs">
+                  <a
+                    href="{% url 'brief_update' brief.pk %}"
+                    class="text-blue-600 hover:text-blue-700 hover:underline"
+                  >
+                    Editar
+                  </a>
+                  <a
+                    href="{% url 'brief_delete' brief.pk %}"
+                    class="text-red-600 hover:text-red-700 hover:underline"
+                  >
+                    Borrar
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-sm text-slate-700">
+      No hay páginas aún{% if request.GET.q %} que coincidan con tu búsqueda{% endif %}.
+    </p>
+  {% endif %}
+</section>
+{% endblock %}

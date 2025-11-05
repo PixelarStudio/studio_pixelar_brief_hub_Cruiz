@@ -1,0 +1,59 @@
+{% extends "core/base.html" %}
+{% block title %}Login | Pixelar Brief Hub{% endblock %}
+
+{% block content %}
+<section class="flex justify-center">
+  <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg shadow-slate-200 border border-slate-100 space-y-6">
+    <header class="space-y-1">
+      <h1 class="text-xl font-semibold text-slate-900">Ingresar</h1>
+      <p class="text-sm text-slate-500">
+        Accedé para crear y editar briefs o enviar mensajes internos.
+      </p>
+    </header>
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700 space-y-1">
+          {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% for field in form %}
+        <div class="space-y-1">
+          <label
+            for="{{ field.id_for_label }}"
+            class="block text-sm font-medium text-slate-700"
+          >
+            {{ field.label }}
+          </label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="text-xs text-red-600 space-y-0.5">
+              {% for error in field.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <button
+        type="submit"
+        class="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white"
+      >
+        Entrar
+      </button>
+    </form>
+
+    <p class="text-xs text-center text-slate-500">
+      ¿No tenés cuenta?
+      <a href="{% url 'signup' %}" class="font-medium text-emerald-600 hover:text-emerald-700">
+        Registrate
+      </a>
+    </p>
+  </div>
+</section>
+{% endblock %}

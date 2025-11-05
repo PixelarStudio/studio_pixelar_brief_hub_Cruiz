@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+{% block title %}Inbox | Pixelar Brief Hub{% endblock %}
+{% block content %}
+  <section class="space-y-4">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <h1 class="text-2xl font-semibold text-slate-900">Bandeja de entrada</h1>
+        <p class="text-sm text-slate-500">
+          Mensajes internos entre usuarios de Studio Pixelar.
+        </p>
+      </div>
+      <div class="flex gap-2 text-sm">
+        <a href="{% url 'send_message' %}" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600">
+          Nuevo mensaje
+        </a>
+        <a href="{% url 'sent_messages' %}" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50">
+          Enviados
+        </a>
+      </div>
+    </div>
+
+    {% if messages_list %}
+      <ul class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm divide-y divide-slate-100">
+        {% for msg in messages_list %}
+          <li class="hover:bg-slate-50">
+            <a href="{% url 'message_detail' msg.pk %}" class="flex flex-col gap-0.5 px-4 py-3">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-slate-900">
+                  {% if not msg.is_read %}<span class="text-emerald-600">(Nuevo)</span> {% endif %}
+                  {{ msg.subject }}
+                </span>
+                <span class="text-xs text-slate-400">
+                  {{ msg.created_at }}
+                </span>
+              </div>
+              <span class="text-xs text-slate-500">
+                de {{ msg.sender.username }}
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-sm text-slate-700">No tenés mensajes recibidos.</p>
+    {% endif %}
+  </section>
+{% endblock %}

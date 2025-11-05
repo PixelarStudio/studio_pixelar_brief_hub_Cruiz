@@ -1,0 +1,75 @@
+{% extends "core/base.html" %}
+{% block title %}
+  {% if view.object %}Editar página{% else %}Nueva página{% endif %} | Pixelar Brief Hub
+{% endblock %}
+{% block extra_head %}
+  {{ form.media }}
+{% endblock %}
+{% block content %}
+  <section class="flex justify-center">
+    <div class="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-lg shadow-slate-200 border border-slate-100 space-y-5">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <h1 class="text-xl font-semibold text-slate-900">
+            {% if view.object %}Editar página{% else %}Nueva página{% endif %}
+          </h1>
+          <p class="mt-1 text-sm text-slate-500">
+            Definí el brief del proyecto del cliente.
+          </p>
+        </div>
+      </div>
+
+      {% if view.object and view.object.reference_image %}
+        <div class="space-y-2">
+          <p class="text-xs font-medium text-slate-600 uppercase tracking-wide">Imagen actual</p>
+          <img
+            src="{{ view.object.reference_image.url }}"
+            alt="Imagen de referencia de {{ view.object.title }}"
+            class="w-full max-h-64 object-cover rounded-xl border border-slate-200"
+          >
+        </div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        {% for field in form %}
+          <div class="space-y-1">
+            <label
+              for="{{ field.id_for_label }}"
+              class="block text-sm font-medium text-slate-700"
+            >
+              {{ field.label }}
+            </label>
+            {{ field }}
+            {% if field.help_text %}
+              <p class="text-xs text-slate-500">{{ field.help_text }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="text-xs text-red-600">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <div class="flex justify-end gap-3">
+          {% if view.object %}
+            <a
+              href="{% url 'brief_detail' view.object.pk %}"
+              class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm text-slate-800 hover:bg-slate-50"
+            >
+              Cancelar
+            </a>
+          {% endif %}
+          <button
+            type="submit"
+            class="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white"
+          >
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+

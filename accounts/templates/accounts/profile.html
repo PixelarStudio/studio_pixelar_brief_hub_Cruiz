@@ -1,0 +1,116 @@
+{% extends "core/base.html" %}
+{% block title %}Perfil | Pixelar Brief Hub{% endblock %}
+
+{% block content %}
+<section class="space-y-4">
+  <header class="flex items-center justify-between gap-3">
+    <div>
+      <h1 class="text-2xl font-semibold text-slate-900">Perfil</h1>
+      <p class="text-sm text-slate-500">
+        Información de tu cuenta y datos personales.
+      </p>
+    </div>
+    <div class="flex gap-2">
+      <a
+        href="{% url 'profile_edit' %}"
+        class="inline-flex items-center rounded-lg border border-slate-300 px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-50"
+      >
+        Editar perfil
+      </a>
+      <a
+        href="{% url 'change_password' %}"
+        class="inline-flex items-center rounded-lg bg-slate-900 px-3 py-1.5 text-sm text-white hover:bg-slate-800"
+      >
+        Cambiar contraseña
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-wrap gap-6 rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+    <div class="flex flex-col items-center gap-2">
+      {% if request.user.profile.avatar %}
+        <img
+          src="{{ request.user.profile.avatar.url }}"
+          alt="Avatar de {{ request.user.username }}"
+          class="w-24 h-24 rounded-full object-cover border border-slate-200"
+        >
+      {% else %}
+        <div class="flex h-24 w-24 items-center justify-center rounded-full bg-slate-100 text-xl font-semibold text-slate-500 border border-slate-200">
+          {{ request.user.username|slice:":2"|upper }}
+        </div>
+      {% endif %}
+      <p class="text-xs text-slate-500">
+        Usuario desde {{ request.user.date_joined|date:"M Y" }}
+      </p>
+    </div>
+
+    <dl class="flex-1 grid gap-3 text-sm text-slate-800 sm:grid-cols-2">
+      <div>
+        <dt class="font-medium text-slate-600">Nombre completo</dt>
+        <dd class="mt-0.5">
+          {% if request.user.first_name or request.user.last_name %}
+            {{ request.user.first_name }} {{ request.user.last_name }}
+          {% else %}
+            <span class="text-slate-400">Sin completar</span>
+          {% endif %}
+        </dd>
+      </div>
+
+      <div>
+        <dt class="font-medium text-slate-600">Usuario</dt>
+        <dd class="mt-0.5">{{ request.user.username }}</dd>
+      </div>
+
+      <div>
+        <dt class="font-medium text-slate-600">Email</dt>
+        <dd class="mt-0.5">
+          {% if request.user.email %}
+            {{ request.user.email }}
+          {% else %}
+            <span class="text-slate-400">Sin completar</span>
+          {% endif %}
+        </dd>
+      </div>
+
+      <div>
+        <dt class="font-medium text-slate-600">Sitio web</dt>
+        <dd class="mt-0.5">
+          {% if request.user.profile.website %}
+            <a
+              href="{{ request.user.profile.website }}"
+              class="text-emerald-600 hover:text-emerald-700"
+              target="_blank" rel="noopener noreferrer"
+            >
+              {{ request.user.profile.website }}
+            </a>
+          {% else %}
+            <span class="text-slate-400">Sin completar</span>
+          {% endif %}
+        </dd>
+      </div>
+
+      <div class="sm:col-span-2">
+        <dt class="font-medium text-slate-600">Biografía</dt>
+        <dd class="mt-0.5">
+          {% if request.user.profile.bio %}
+            <p>{{ request.user.profile.bio }}</p>
+          {% else %}
+            <span class="text-slate-400">Sin completar</span>
+          {% endif %}
+        </dd>
+      </div>
+
+      <div>
+        <dt class="font-medium text-slate-600">Fecha de nacimiento</dt>
+        <dd class="mt-0.5">
+          {% if request.user.profile.birth_date %}
+            {{ request.user.profile.birth_date|date:"d/m/Y" }}
+          {% else %}
+            <span class="text-slate-400">Sin completar</span>
+          {% endif %}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+{% endblock %}

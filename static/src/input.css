@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f1f5f9; 
+  color: #020617;          
+}
+
+/* Inputs y selects generales */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;              
+  border: 1px solid #cbd5f5;          
+  background-color: #ffffff;          
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #020617;                     
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+/* Placeholders claros y visibles */
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af; 
+}
+
+/* Focus accesible y prolijo */
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #10b981;                         
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25); 
+}
+
+/* File input normalito, sin cosas raras */
+
+input[type="file"] {
+  font-size: 0.875rem;
+  color: #020617;
+}
