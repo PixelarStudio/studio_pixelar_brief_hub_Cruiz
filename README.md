@@ -42,6 +42,10 @@ La app cumple con los requisitos del trabajo final (home, about, pages, auth, pe
 - `templates/` – Distribuidos por app, todas heredan de `core/base.html`.
 
 ---
+## Video demo
+
+👉 [Ver video de demostración (Google Drive)](https://drive.google.com/file/d/1ApQ2mC_rfqp88JEvKkjjVxuniZHqEV9h/view?usp=sharing)
+
 
 ## Requisitos previos
 
