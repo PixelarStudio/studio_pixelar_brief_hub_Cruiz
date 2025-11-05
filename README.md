@@ -57,7 +57,7 @@ La app cumple con los requisitos del trabajo final (home, about, pages, auth, pe
 
    ```bash
         git clone https://github.com/PixelarStudio/studio_pixelar_brief_hub_Cruiz.git
-        cd pixelar-brief-hub-Cruiz
+        cd studio_pixelar_brief_hub_Cruiz
    ```
 2. **Crear y activar entorno virtual**
    ```bash
