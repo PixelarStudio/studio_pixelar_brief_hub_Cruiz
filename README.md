@@ -139,8 +139,6 @@ Cada `Brief` contiene:
 - `created_at` – fecha de creación.
 - `owner` – usuario que cargó el brief.
 
-Los briefs que cargues pueden basarse en **proyectos reales** del portfolio de Studio Pixelar (San Isidro Policlínica Privada, Studio Pixelar, Ruba Tecno, Sempre A Full), adaptados para este panel interno.
-
 #### Cuentas y perfil (`accounts`)
 
 - **Signup**: registro de usuarios con `username`, `email` y `password`.
